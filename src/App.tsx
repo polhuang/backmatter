@@ -2,14 +2,19 @@ import React, { useState, useCallback } from 'react'
 import './App.css'
 import { Editor } from './editor'
 
-export function App() {
-  const [doc, setDoc] = useState<string>("Hello pol\n")
+export interface note {
+  title: string,
+  content: string
+}
 
-  const handleDocChange = useCallback((newDoc: string) => {
-    setDoc(newDoc)
+export function App() {
+  const [currentNote, setCurrentNote] = useState<note>({ title: "hi", content: "dddhi" })
+
+  const handleDocChange = useCallback((newCurrentNote: note) => {
+    setCurrentNote(newCurrentNote)
   }, [])
   
   return (
-    <div className="app"><Editor onChange={handleDocChange} initialDoc={doc} /></div>
+    <div className="app"><Editor onChange={handleDocChange} initialDoc={currentNote} /></div>
   )
 }

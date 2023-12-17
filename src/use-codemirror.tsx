@@ -7,6 +7,7 @@ import { markdown, markdownLanguage }  from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
 import { tags } from '@lezer/highlight'
 import { oneDark } from '@codemirror/theme-one-dark'
+import { note } from './App'
 
 export const transparentTheme = EditorView.theme({
   '&': {
@@ -34,7 +35,7 @@ const syntax = HighlightStyle.define([
 import React from 'react'
 
 interface Props {
-  initialDoc: string,
+  initialDoc: note,
   onChange?: (state: EditorState) => void
 }
 
@@ -49,7 +50,7 @@ export const useCodeMirror = <T extends Element>(
     if (!refContainer.current) return
 
     const startState = EditorState.create({
-      doc: props.initialDoc,
+      doc: props.initialDoc.content,
       extensions: [
         keymap.of([...defaultKeymap, ...historyKeymap]),
         history(),
@@ -68,6 +69,7 @@ export const useCodeMirror = <T extends Element>(
         EditorView.updateListener.of(update => {
           if (update.changes) {
             onChange && onChange(update.state)
+            console.log(update.state)
           }
         })
       ]
