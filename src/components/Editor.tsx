@@ -1,17 +1,18 @@
 import React, { useCallback, useEffect } from 'react'
-import { useCodeMirror } from './use-codemirror'
-import './editor.css'
-import { note } from './App'
+import { useCodeMirror } from '../utils/use-codemirror'
+import './Editor.css'
+import { Note } from '../App'
+import { EditorState } from '@codemirror/state'
 
 interface Props {
-  initialDoc: note,
-  onChange: (newCurrentNote: note) => void
+  initialDoc: Note,
+  onChange: (newCurrentNote: Note) => void
 }
 
 export function Editor(props: Props) {
   const { onChange, initialDoc } = props
   const handleChange = useCallback(
-    (state) => onChange({...initialDoc, content: state.doc.toString() }),
+    (state: EditorState) => onChange({...initialDoc, content: state.doc.toString() }),
     [onChange, initialDoc]
   )
   const [refContainer, editorView] = useCodeMirror<HTMLDivElement>({

@@ -1,17 +1,31 @@
 import React, { useState, useCallback } from 'react'
 import './App.css'
-import { Editor } from './editor'
+import { Editor } from './components/Editor'
 import { Sidebar } from './components/Sidebar'
 
-export interface note {
+export interface Note {
+  noteID: number,
   title: string,
   content: string
 }
 
-export function App() {
-  const [currentNote, setCurrentNote] = useState<note>({ title: "hi", content: "dddhi" })
+const NotesDB: Note[] = [
+  {
+    noteID: 0,
+    title: "Good",
+    content: "Morning"
+  },
+  {
+    noteID: 1,
+    title: "Bad",
+    content: "Night"
+  }
+]
 
-  const handleDocChange = useCallback((newCurrentNote: note) => {
+export function App() {
+  const [currentNote, setCurrentNote] = useState<Note>(NotesDB[0])
+
+  const handleDocChange = useCallback((newCurrentNote: Note) => {
     setCurrentNote(newCurrentNote)
   }, [])
 
