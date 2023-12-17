@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import './App.css'
 import { Editor } from './editor'
+import { Sidebar } from './components/Sidebar'
 
 export interface note {
   title: string,
@@ -13,8 +14,12 @@ export function App() {
   const handleDocChange = useCallback((newCurrentNote: note) => {
     setCurrentNote(newCurrentNote)
   }, [])
-  
-  return (
-    <div className="app"><Editor onChange={handleDocChange} initialDoc={currentNote} /></div>
+
+    
+  return (  
+    <div className="app">
+      <Editor onChange={handleDocChange} initialDoc={currentNote} />
+      <Sidebar currentNote={currentNote} />
+    </div>
   )
 }
