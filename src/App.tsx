@@ -33,7 +33,7 @@ export function App() {
   return (  
     <div className="app">
       <Editor onChange={handleDocChange} initialDoc={currentNote} />
-      <Sidebar currentNote={currentNote} />
+      <Sidebar notes={NotesDB} />
     </div>
   )
 }

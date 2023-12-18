@@ -2,11 +2,11 @@ import React from 'react'
 import { Note } from '../App'
 
 interface Props {
-  currentNote: Note
+  notes: Note[]
 }
 
 export function Sidebar(props: Props) {
-  console.log("Sidebar: ", props.currentNote.content)
+  console.log("Sidebar: ", props.notes)
   return (
     <div>
       //
